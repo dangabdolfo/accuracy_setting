@@ -33,6 +33,9 @@ class _MyAppState extends State<MyApp> {
                   await AccuracySetting.getAccuracySetting();
               print(mode);
 
+              bool hasGps = await AccuracySetting.deviceHasGps();
+              print("Your device has a GPS => $hasGps");
+
               if (await AccuracySetting.getProviderEnabled(
                   LocationProvider.GPS)) {
                 print("GPS Active");

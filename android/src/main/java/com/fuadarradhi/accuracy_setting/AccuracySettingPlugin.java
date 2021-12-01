@@ -44,6 +44,7 @@ public class AccuracySettingPlugin implements FlutterPlugin, MethodCallHandler {
 
     LocationManager locationManager = (LocationManager) mContext
             .getSystemService(mContext.LOCATION_SERVICE);
+    PackageManager packageManager = mContext.getPackageManager();
 
     switch (call.method){
       case "getAccuracySetting":
@@ -65,6 +66,10 @@ public class AccuracySettingPlugin implements FlutterPlugin, MethodCallHandler {
       case "getNetworkEnabled":
         boolean networkActive = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         result.success(networkActive);
+        break;
+      case "deviceHasGps":
+        boolean hasGPS = packageManager.hasSystemFeature(PackageManager.FEATURE_LOCATION_GPS);
+        result.success(hasGPS);
         break;
       default:
         result.notImplemented();

@@ -34,4 +34,9 @@ class AccuracySetting {
     }
     return providerEnabled;
   }
+
+  static Future<bool> deviceHasGps() async {
+    bool hasGPS = await _channel.invokeMethod('deviceHasGps');
+    return hasGPS;
+  }
 }
