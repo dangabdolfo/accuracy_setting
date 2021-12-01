@@ -1,45 +1,60 @@
 package com.fuadarradhi.accuracy_setting;
 
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
+
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** AccuracySettingPlugin */
-public class AccuracySettingPlugin implements MethodCallHandler {
+public class AccuracySettingPlugin implements FlutterPlugin, MethodCallHandler {
   private MethodChannel channel;
-  private Registrar registrar;
+  private Context mContext;
 
-  AccuracySettingPlugin(Registrar registrar){
-    this.registrar = registrar;
+  public static final String channelName = "accuracy_setting";
+
+
+  @Override
+  public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+    this.mContext = binding.getApplicationContext();
+    channel = new MethodChannel(binding.getBinaryMessenger(), AccuracySettingPlugin.channelName);
+    channel.setMethodCallHandler(this);
   }
-  public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "accuracy_setting");
-    channel.setMethodCallHandler(new AccuracySettingPlugin(registrar));
+
+  @Override
+  public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+    channel.setMethodCallHandler(null);
   }
 
   @Override
   public void onMethodCall(MethodCall call,Result result) {
 
-    LocationManager locationManager = (LocationManager) registrar.context()
-            .getSystemService(registrar.context().LOCATION_SERVICE);
+    if(mContext == null){
+      result.error("-1", "Plugin not attached", "You have to attach the plugin before call method");
+    }
+
+    LocationManager locationManager = (LocationManager) mContext
+            .getSystemService(mContext.LOCATION_SERVICE);
 
     switch (call.method){
       case "getAccuracySetting":
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
           try {
-            int mode = Settings.Secure.getInt(registrar.context().getContentResolver(), Settings.Secure.LOCATION_MODE);
+            int mode = Settings.Secure.getInt(mContext.getContentResolver(), Settings.Secure.LOCATION_MODE);
             result.success(mode);
           } catch (Settings.SettingNotFoundException e) {
             e.printStackTrace();
           }
-        }else{
+        } else {
           result.success(4);
         }
         break;
