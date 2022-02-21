@@ -29,9 +29,14 @@ class _MyAppState extends State<MyApp> {
               'Get Accuracy Setting',
             ),
             onPressed: () async {
-              AccuracySettingMode mode =
+              try{
+                AccuracySettingMode mode =
                   await AccuracySetting.getAccuracySetting();
-              print(mode);
+                print(mode);
+              }
+              catch(e){
+                print(e);
+              }
 
               bool hasGps = await AccuracySetting.deviceHasGps();
               print("Your device has a GPS => $hasGps");

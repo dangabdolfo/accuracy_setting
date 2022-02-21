@@ -1,4 +1,4 @@
-group 'com.fuadarradhi.accuracy_setting'
+group 'com.dreaminzzz.accuracy_setting'
 version '1.0'
 
 buildscript {

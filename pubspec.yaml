@@ -1,7 +1,6 @@
 name: accuracy_setting
 description: Get Location Accuracy Setting
 version: 2.1.0
-homepage: https://github.com/fuadarradhi/accuracy_setting
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -27,7 +26,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.fuadarradhi.accuracy_setting
+        package: com.dreaminzzz.accuracy_setting
         pluginClass: AccuracySettingPlugin
       ios:
         pluginClass: AccuracySettingPlugin

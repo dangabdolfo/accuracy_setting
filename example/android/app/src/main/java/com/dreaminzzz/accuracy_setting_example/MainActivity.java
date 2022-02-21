@@ -1,4 +1,4 @@
-package com.fuadarradhi.accuracy_setting_example;
+package com.dreaminzzz.accuracy_setting_example;
 
 import io.flutter.embedding.android.FlutterActivity;
 

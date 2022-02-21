@@ -1,4 +1,4 @@
-package com.fuadarradhi.accuracy_setting;
+package com.dreaminzzz.accuracy_setting;
 
 
 import android.content.Context;
