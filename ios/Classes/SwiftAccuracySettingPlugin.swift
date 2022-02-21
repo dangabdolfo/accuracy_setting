@@ -1,5 +1,7 @@
 import Flutter
+import Foundation
 import UIKit
+import CoreLocation
 
 public class SwiftAccuracySettingPlugin: NSObject, FlutterPlugin {
     public static func register(with registrar: FlutterPluginRegistrar) {
