@@ -2,6 +2,7 @@ import Flutter
 import Foundation
 import UIKit
 import CoreLocation
+import SystemConfiguration.CaptiveNetwork
 
 public class SwiftAccuracySettingPlugin: NSObject, FlutterPlugin {
     public static func register(with registrar: FlutterPluginRegistrar) {
